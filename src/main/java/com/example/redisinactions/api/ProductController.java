@@ -19,9 +19,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.getTenProduct());
     }
 
-    @PostMapping("/products")
-    public ResponseEntity<?> saveProductMock() {
-        productService.saveProductMock();
+    @PostMapping("/products/top10/evict")
+    public ResponseEntity<Void> evictTop10Products() {
+        productService.evict();
         return ResponseEntity.ok().build();
     }
+
 }

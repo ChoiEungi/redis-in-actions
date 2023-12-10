@@ -2,3 +2,7 @@ spring:
   redis:
     host: localhost
     port: 6379
+    timeout: 30001
+
+  jpa:
+    open-in-view: false

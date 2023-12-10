@@ -1,5 +1,6 @@
-package com.example.redisinactions.api;
+package com.example.redisinactions.api.v2;
 
+import com.example.redisinactions.api.Product;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
