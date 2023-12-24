@@ -6,8 +6,8 @@ import org.springframework.util.StringUtils;
 public enum LockConfig {
 
   DEFUALT(10L, 1L, TimeUnit.SECONDS),
-  PRODUCT_DECREASE("PRODUCT", 10L, 1L, TimeUnit.SECONDS),
-  LOGIN_LOCK("PRODUCT", 10L, 1L, TimeUnit.SECONDS);
+  PRODUCT_DECREASE("PRODUCT", 1L, 1L, TimeUnit.SECONDS),
+  LOGIN_LOCK("LOGIN_LOCK", 10L, 1L, TimeUnit.SECONDS);
 
   public final Long waitTime;
   public final Long leaseTime;

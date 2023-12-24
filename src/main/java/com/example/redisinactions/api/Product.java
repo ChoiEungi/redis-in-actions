@@ -1,4 +1,4 @@
-package com.example.redisinactions.api;
+  package com.example.redisinactions.api;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,13 +24,27 @@ public class Product {
 
     private BigDecimal price;
 
+    private Long quantity = 0L;
+
     public Product(String description, BigDecimal price) {
-        this(null, description, price);
+        this(description, price, 0L);
     }
 
-    private Product(Long id, String description, BigDecimal price) {
+    public Product(String description, BigDecimal price, Long quantity) {
+        this(null, description, price, quantity);
+    }
+
+    private Product(Long id, String description, BigDecimal price, Long quantity){
         this.id = id;
         this.description = description;
         this.price = price;
+        this.quantity = quantity;
+    }
+
+    public void decrease(Long quantity) {
+        this.quantity -= quantity;
+        if (this.quantity < 0) {
+            throw new IllegalArgumentException("재고가 부족합니다.");
+        }
     }
 }
