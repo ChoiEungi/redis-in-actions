@@ -1,4 +1,4 @@
-package com.example.redisinactions.infra;
+package com.example.redisinactions.lock;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,12 +7,10 @@ import java.lang.annotation.Target;
 
 @Target(value = ElementType.METHOD)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface V2DistributedLock {
+public @interface DistributedLock {
 
   String key();
 
   LockConfig lockConfig();
-
-  boolean isTransactionEnabled() default false;
 
 }

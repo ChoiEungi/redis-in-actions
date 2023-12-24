@@ -1,4 +1,4 @@
-package com.example.redisinactions.infra;
+package com.example.redisinactions.lock;
 
 import com.example.redisinactions.common.JoinPointSpELParser;
 import lombok.RequiredArgsConstructor;

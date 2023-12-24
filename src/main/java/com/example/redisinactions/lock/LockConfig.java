@@ -1,4 +1,4 @@
-package com.example.redisinactions.infra;
+package com.example.redisinactions.lock;
 
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;

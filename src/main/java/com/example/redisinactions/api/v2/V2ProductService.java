@@ -1,12 +1,12 @@
 package com.example.redisinactions.api.v2;
 
-import static com.example.redisinactions.infra.LockConfig.PRODUCT_DECREASE;
+import static com.example.redisinactions.lock.LockConfig.PRODUCT_DECREASE;
 
 import com.example.redisinactions.api.Product;
 import com.example.redisinactions.api.ProductRepository;
-import com.example.redisinactions.infra.DistributedLock;
-import com.example.redisinactions.infra.RedissonDistributedLockTemplate;
-import com.example.redisinactions.infra.V2DistributedLock;
+import com.example.redisinactions.lock.DistributedLock;
+import com.example.redisinactions.lock.RedissonDistributedLockTemplate;
+import com.example.redisinactions.lock.V2DistributedLock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

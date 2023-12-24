@@ -1,4 +1,4 @@
-package com.example.redisinactions.infra;
+package com.example.redisinactions.lock;
 
 import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
 @Slf4j

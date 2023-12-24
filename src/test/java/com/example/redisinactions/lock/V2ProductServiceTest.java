@@ -1,4 +1,4 @@
-package com.example.redisinactions.infra;
+package com.example.redisinactions.lock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
