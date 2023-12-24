@@ -1,6 +1,6 @@
 package com.example.redisinactions.infra;
 
-import com.example.redisinactions.common.JointPointSpELParser;
+import com.example.redisinactions.common.JoinPointSpELParser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 public class DistributedLockAspect {
 
   private final RedissonClient redissonClient;
-  private final JointPointSpELParser jointPointSpELParser;
+  private final JoinPointSpELParser joinPointSpELParser;
 
   @Around("@annotation(distributedLock)")
   public Object lock(ProceedingJoinPoint pjp, DistributedLock distributedLock) throws Throwable {
-    String pa = jointPointSpELParser.parseSpEL(pjp, distributedLock.key());
+    String pa = joinPointSpELParser.parseSpEL(pjp, distributedLock.key());
     final String key = distributedLock.lockConfig().generateKey(pa);
     RLock lock = redissonClient.getLock(key);
     try {

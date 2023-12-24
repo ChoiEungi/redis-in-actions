@@ -9,7 +9,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JointPointSpELParser {
+public class JoinPointSpELParser {
 
   public String parseSpEL(ProceedingJoinPoint pjp, String spEL) {
     final MethodSignature methodSignature = (MethodSignature) pjp.getSignature();

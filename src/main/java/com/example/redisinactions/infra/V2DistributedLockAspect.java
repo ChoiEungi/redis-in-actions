@@ -1,6 +1,6 @@
 package com.example.redisinactions.infra;
 
-import com.example.redisinactions.common.JointPointSpELParser;
+import com.example.redisinactions.common.JoinPointSpELParser;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class V2DistributedLockAspect {
 
-  private final JointPointSpELParser jointPointSpELParser;
+  private final JoinPointSpELParser joinPointSpELParser;
   private final RedissonDistributedLockTemplate redissonDistributedLockTemplate;
 
   @Around("@annotation(v2DistributedLock)")
   public Object lock(ProceedingJoinPoint pjp, V2DistributedLock v2DistributedLock) {
-    String parsedKey = jointPointSpELParser.parseSpEL(pjp, v2DistributedLock.key());
+    String parsedKey = joinPointSpELParser.parseSpEL(pjp, v2DistributedLock.key());
     final String key = v2DistributedLock.lockConfig().generateKey(parsedKey);
 
     if (v2DistributedLock.isTransactionEnabled()) {

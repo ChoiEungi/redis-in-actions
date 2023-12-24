@@ -47,6 +47,22 @@ class V2ProductServiceTest {
   }
 
   @Test
+  void decreaseWithAOPV2() {
+    // given
+    int requestCount = 10;
+
+    // when
+    List<CompletableFuture<?>> futureList = executeAsync(() -> v2ProductService.decreaseWithAOPV2(product.getId(), 1L), requestCount);
+    futureList.forEach(CompletableFuture::join);
+
+    // then
+    Product result = productRepository.findById(product.getId()).orElseThrow();
+    assertThat(result.getQuantity()).isEqualTo(90L);
+
+
+  }
+
+  @Test
   void decreaseWithCallback() {
     // given
     int requestCount = 10;

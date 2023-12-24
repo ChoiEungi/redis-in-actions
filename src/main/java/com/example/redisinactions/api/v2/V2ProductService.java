@@ -6,6 +6,7 @@ import com.example.redisinactions.api.Product;
 import com.example.redisinactions.api.ProductRepository;
 import com.example.redisinactions.infra.DistributedLock;
 import com.example.redisinactions.infra.RedissonDistributedLockTemplate;
+import com.example.redisinactions.infra.V2DistributedLock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,18 @@ public class V2ProductService {
   private final ProductRepository productRepository;
   private final RedissonDistributedLockTemplate redissonDistributedLockTemplate;
 
-  @DistributedLock(key = "#id", lockConfig = PRODUCT_DECREASE, isTransactionEnabled = true)
+  @DistributedLock(key = "#id", lockConfig = PRODUCT_DECREASE)
   public Product decreaseWithAOP(Long id, Long quantity) {
     Product product = productRepository.findById(id).orElseThrow();
     product.decrease(quantity);
-    Product save = productRepository.save(product);
-    return save;
+    return productRepository.save(product);
+  }
+
+  @V2DistributedLock(key = "#id", lockConfig = PRODUCT_DECREASE, isTransactionEnabled = true)
+  public Product decreaseWithAOPV2(Long id, Long quantity) {
+    Product product = productRepository.findById(id).orElseThrow();
+    product.decrease(quantity);
+    return product;
   }
 
   public Product decreaseWithCallback(Long id, Long quantity) {

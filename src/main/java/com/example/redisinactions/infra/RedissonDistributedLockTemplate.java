@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
 @Slf4j
@@ -21,6 +22,7 @@ public class RedissonDistributedLockTemplate {
     this.redissonClient = redissonClient;
     this.transactionTemplate = new TransactionTemplate(platformTransactionManager);
     this.transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+    this.transactionTemplate.afterPropertiesSet();
   }
 
   public void executeWithLock(String key, LockConfig lockConfig, Runnable callback) {

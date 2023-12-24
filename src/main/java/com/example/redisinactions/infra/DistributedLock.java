@@ -13,6 +13,4 @@ public @interface DistributedLock {
 
   LockConfig lockConfig();
 
-  boolean isTransactionEnabled() default false;
-
 }
