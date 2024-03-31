@@ -11,7 +11,8 @@ import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.example.redisinactions.config.CacheConfig.CacheName.PRODUCT_CACHE;
+import static com.example.redisinactions.config.RedisCacheConfig.CacheName.PRODUCT_CACHE;
+
 
 @Service
 @Slf4j

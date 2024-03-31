@@ -1,40 +1,32 @@
 package com.example.redisinactions.config;
 
-import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.context.annotation.Primary;
 
-import java.time.Duration;
-
-import static com.example.redisinactions.config.CacheConfig.CacheName.PRODUCT_CACHE;
-
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableCaching
-public class CacheConfig {
+@RequiredArgsConstructor
+public class CacheConfig implements CachingConfigurer {
 
+    private final CacheManager redisCacheManager;
+
+    @Override
     @Bean
-    public RedisCacheConfiguration cacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(60))
-                .disableCachingNullValues()
-                .serializeKeysWith(SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+    @Primary
+    public CacheManager cacheManager() {
+        return redisCacheManager;
     }
 
+    @Override
     @Bean
-    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        return (builder) -> builder
-                .withCacheConfiguration(PRODUCT_CACHE,
-                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)));
+    public CacheErrorHandler errorHandler() {
+        return new CustomCacheErrorHandler();
     }
 
-
-    public static class CacheName {
-        public static final String PRODUCT_CACHE = "V2_productCache";
-    }
 }
